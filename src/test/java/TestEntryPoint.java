@@ -2,6 +2,7 @@ import base.Config;
 import models.Device;
 import service.DeviceFarmService;
 import testmodule.AndroidTest;
+import testmodule.IOSTest;
 
 import java.util.Arrays;
 
@@ -15,8 +16,12 @@ public class TestEntryPoint {
         Device[] devices = deviceService.getAvailableDevices();
 
         //Appium instance
-        AndroidTest android = new AndroidTest(config);
-
-        Arrays.stream(devices).forEach(android::newThread);
+        if (config.platform().equals("iOS")) {
+            IOSTest iosTest = new IOSTest(config);
+            Arrays.stream(devices).forEach(iosTest::newThread);
+        } else {
+            AndroidTest android = new AndroidTest(config);
+            Arrays.stream(devices).forEach(android::newThread);
+        }
     }
 }

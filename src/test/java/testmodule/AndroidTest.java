@@ -29,7 +29,7 @@ public class AndroidTest extends ConfigConsumer implements BaseTestModule {
         AndroidDriver driver = null;
         try {
             driver = new AndroidDriver(
-                    URI.create(this.config + "wd/hub").toURL(),
+                    URI.create(this.config.BaseUrl() + "wd/hub").toURL(),
                     options
             );
             testStatus = true ;
