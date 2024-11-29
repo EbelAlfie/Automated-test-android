@@ -13,7 +13,9 @@ pipeline {
     stages {
         stage("Run Test") {
             steps{
-                sh "./gradlew test --tests '${params.ARG_TEST_CLASS}'"
+                sh """
+                    ./gradlew test --tests \\"${params.ARG_TEST_CLASS}\\"
+                """
             }
         }
     }
