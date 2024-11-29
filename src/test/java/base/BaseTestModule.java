@@ -3,6 +3,8 @@ package base;
 import models.Device;
 
 public interface BaseTestModule {
+
+    public void beforeTest() ;
     /**
      *
      * @param device as single device instance
@@ -10,5 +12,5 @@ public interface BaseTestModule {
      */
     public boolean runTest(Device device);
 
-    void newThread(Device device);
+    public void afterTest() ;
 }

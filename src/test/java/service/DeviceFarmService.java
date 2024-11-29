@@ -13,6 +13,9 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 
+/**
+ *
+ * */
 public class DeviceFarmService extends ConfigConsumer {
 
     public DeviceFarmService(Config config) {super(config);}

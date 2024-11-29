@@ -1,29 +1,40 @@
+import base.BaseTestModule;
 import base.Config;
 import models.Device;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 import service.DeviceFarmService;
 import testmodule.AndroidTest;
 import testmodule.IOSTest;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TestEntryPoint {
 
-    @Test
-    public void mainTest() {
-        Config config = new Config();
+    private final Config config = new Config();
+    private final List<BaseTestModule> modules = new ArrayList<>();
 
-        //Services
+    @DataProvider(name = "device-provider", parallel = true)
+    public Object[] devicesProvider() {
         DeviceFarmService deviceService = new DeviceFarmService(config);
         Device[] devices = deviceService.getAvailableDevices();
+        return devices;
+    }
 
-        //Appium instance
-        if (config.platform.equals("iOS")) {
-            IOSTest iosTest = new IOSTest(config);
-            Arrays.stream(devices).forEach(iosTest::newThread);
-        } else {
-            AndroidTest android = new AndroidTest(config);
-            Arrays.stream(devices).forEach(android::newThread);
-        }
+    @Test(dataProvider = "device-provider")
+    public void testMethod(Device device) {
+//        modules.add(new IOSTest(config));
+        modules.add(new AndroidTest(config));
+
+        modules.forEach(item ->
+                item.runTest(device)
+        );
+    }
+
+    @AfterTest
+    void tearDown() {
+        modules.forEach(BaseTestModule::afterTest);
     }
 }

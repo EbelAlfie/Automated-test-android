@@ -13,12 +13,18 @@ import java.net.URI;
 import java.net.URL;
 
 public class IOSTest extends ConfigConsumer implements BaseTestModule {
+    IOSDriver driver = null;
 
     public IOSTest(Config config) {super(config);}
 
     @Override
+    public void beforeTest() {
+
+    }
+
+    @Override
     public boolean runTest(Device device) {
-        Boolean testStatus = false;
+        boolean testStatus = false;
 
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("platformName", "iOS");
@@ -27,7 +33,6 @@ public class IOSTest extends ConfigConsumer implements BaseTestModule {
         caps.setCapability("appium:bundleId", config.appPackageId);
         caps.setCapability("appium:udid", device.udid);
 
-        IOSDriver driver = null;
         try {
             driver = new IOSDriver(
                     URI.create(this.config.baseUrl + "wd/hub").toURL(),
@@ -43,10 +48,7 @@ public class IOSTest extends ConfigConsumer implements BaseTestModule {
     }
 
     @Override
-    public void newThread(Device device) {
-        Runnable runnable = () -> runTest(device);
-
-        Thread thread = new Thread(runnable);
-        thread.start();
+    public void afterTest() {
+        driver.quit();
     }
 }
