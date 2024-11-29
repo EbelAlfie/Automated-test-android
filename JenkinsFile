@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(
+            name: 'ARG_TEST_CLASS',
+            defaultValue:'TestEntryPoint',
+            description:'Target Test Class',
+            trim:true
+          )
+    }
+
+    stages {
+        stage("Run Test") {
+            steps{
+                sh "gradle clean test --tests ${params.ARG_TEST_CLASS}"
+            }
+        }
+    }
+
+}
