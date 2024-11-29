@@ -19,17 +19,17 @@ public class AndroidTest extends ConfigConsumer implements BaseTestModule {
         Boolean testStatus = false ;
 
         UiAutomator2Options options = new UiAutomator2Options()
-                .setAppPackage(config.appPackageId());
+                .setAppPackage(config.appPackageId);
 
         options.setCapability("platformName", "Android");
-        options.setCapability("appium:udid", device.udid());
-        options.setCapability("appPackage", config.appPackageId());
-        options.setCapability("appActivity", config.appActivity());
+        options.setCapability("appium:udid", device.udid);
+        options.setCapability("appPackage", config.appPackageId);
+        options.setCapability("appActivity", config.appActivity);
 
         AndroidDriver driver = null;
         try {
             driver = new AndroidDriver(
-                    URI.create(this.config.BaseUrl() + "wd/hub").toURL(),
+                    URI.create(this.config.baseUrl + "wd/hub").toURL(),
                     options
             );
             testStatus = true ;

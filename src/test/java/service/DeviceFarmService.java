@@ -20,7 +20,7 @@ public class DeviceFarmService extends ConfigConsumer {
     public Device[] getAvailableDevices() {
         URL devicesUrl;
         try {
-            devicesUrl = URI.create(config.BaseUrl() + "device-farm/api/device").toURL();
+            devicesUrl = URI.create(config.baseUrl + "device-farm/api/device").toURL();
         } catch (MalformedURLException e) {
             return new Device[0];
         }

@@ -24,13 +24,13 @@ public class IOSTest extends ConfigConsumer implements BaseTestModule {
         caps.setCapability("platformName", "iOS");
         caps.setCapability("appium:automationName", "XCUITest");
 
-        caps.setCapability("appium:bundleId", config.appPackageId());
-        caps.setCapability("appium:udid", device.udid());
+        caps.setCapability("appium:bundleId", config.appPackageId);
+        caps.setCapability("appium:udid", device.udid);
 
         IOSDriver driver = null;
         try {
             driver = new IOSDriver(
-                    URI.create(this.config.BaseUrl() + "wd/hub").toURL(),
+                    URI.create(this.config.baseUrl + "wd/hub").toURL(),
                     caps
             );
             driver.findElement(new AppiumBy.ByAccessibilityId("ic chat")).click();
