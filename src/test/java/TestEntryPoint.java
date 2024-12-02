@@ -8,6 +8,9 @@ import service.DeviceFarmService;
 import testmodule.AndroidTest;
 import testmodule.IOSTest;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 public class TestEntryPoint {
 
     private final Config config = new Config();
@@ -17,7 +20,8 @@ public class TestEntryPoint {
     public Object[] devicesProvider() {
         DeviceFarmService deviceService = new DeviceFarmService(config);
         Device[] devices = deviceService.getAvailableDevices();
-        System.out.println(">>> Device providerrr");
+        System.out.println(">>> Available Devices");
+        Arrays.stream(devices).forEach(item -> System.out.println(item.udid));
         return devices;
     }
 
