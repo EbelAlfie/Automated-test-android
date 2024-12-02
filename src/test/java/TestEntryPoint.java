@@ -8,11 +8,6 @@ import service.DeviceFarmService;
 import testmodule.AndroidTest;
 import testmodule.IOSTest;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class TestEntryPoint {
 
     private final Config config = new Config();
