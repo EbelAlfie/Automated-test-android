@@ -27,7 +27,7 @@ public class TestEntryPoint {
     public void testMethod(Device device) {
 //        modules.add(new IOSTest(config));
         BaseTestModule testModule;
-        if(device.platform.equals("iOS")) {
+        if(device.platform.equals("ios")) {
             testModule = new IOSTest(config);
         } else {
            testModule = new AndroidTest(config);
