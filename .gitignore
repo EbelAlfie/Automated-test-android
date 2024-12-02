@@ -41,4 +41,4 @@ bin/
 ### Mac OS ###
 .DS_Store
 
-/src/test/java/base.Config.java
+/src/test/java/base/Config.java
