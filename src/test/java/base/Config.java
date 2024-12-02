@@ -15,7 +15,7 @@ public class Config {
     public Config() {
         this.baseUrl = "http://localhost:4723/";
         this.appPackageId = "com.alfamart.alfagift.debug";
-        this.appActivity = "com.hahahihi.screen.splash.SplashActivity";
+        this.appActivity = "";
         this.platform = "android";
     }
 

@@ -35,6 +35,6 @@ public class TestEntryPoint {
 
     @AfterTest
     void tearDown() {
-        modules.forEach(BaseTestModule::afterTest);
+//        modules.forEach(BaseTestModule::afterTest);
     }
 }
