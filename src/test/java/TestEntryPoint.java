@@ -8,7 +8,9 @@ import service.DeviceFarmService;
 import testmodule.AndroidTest;
 import testmodule.IOSTest;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TestEntryPoint {
@@ -20,6 +22,7 @@ public class TestEntryPoint {
     public Object[] devicesProvider() {
         DeviceFarmService deviceService = new DeviceFarmService(config);
         Device[] devices = deviceService.getAvailableDevices();
+        System.out.println(">>> Device providerrr");
         return devices;
     }
 
