@@ -27,8 +27,7 @@ public class TestEntryPoint {
 
     @Test(
             dataProvider = "device-provider",
-            threadPoolSize = 4,
-            invocationCount = 4
+            threadPoolSize = 4
     )
     public void testMethod(Device device) {
         BaseTestModule testModule;
