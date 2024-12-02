@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
+import java.time.Duration;
 
 /**
  *
@@ -34,7 +35,10 @@ public class DeviceFarmService extends ConfigConsumer {
                 .url(devicesUrl)
                 .build();
 
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = new OkHttpClient
+                .Builder()
+                .callTimeout(Duration.ofSeconds(15L))
+                .build();
 
         try (Response res = client.newCall(request).execute()){
 

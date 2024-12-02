@@ -25,7 +25,6 @@ public class TestEntryPoint {
 
     @Test(dataProvider = "device-provider")
     public void testMethod(Device device) {
-//        modules.add(new IOSTest(config));
         BaseTestModule testModule;
         if(device.platform.equals("ios")) {
             testModule = new IOSTest(config);
