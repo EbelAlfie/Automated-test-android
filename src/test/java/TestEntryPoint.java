@@ -25,7 +25,11 @@ public class TestEntryPoint {
         return devices;
     }
 
-    @Test(dataProvider = "device-provider")
+    @Test(
+            dataProvider = "device-provider",
+            threadPoolSize = 4,
+            invocationCount = 4
+    )
     public void testMethod(Device device) {
         BaseTestModule testModule;
         if(device.platform.equals("ios")) {
