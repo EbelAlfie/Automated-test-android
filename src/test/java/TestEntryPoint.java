@@ -14,7 +14,7 @@ import java.util.List;
 public class TestEntryPoint {
 
     private final Config config = new Config();
-    private final List<BaseTestModule> modules = new ArrayList<>();
+//    private final List<BaseTestModule> modules = new ArrayList<>();
 
     @DataProvider(name = "device-provider", parallel = true)
     public Object[] devicesProvider() {
@@ -26,11 +26,14 @@ public class TestEntryPoint {
     @Test(dataProvider = "device-provider")
     public void testMethod(Device device) {
 //        modules.add(new IOSTest(config));
-        modules.add(new AndroidTest(config));
+        BaseTestModule testModule;
+        if(device.platform.equals("iOS")) {
+            testModule = new IOSTest(config);
+        } else {
+           testModule = new AndroidTest(config);
+        }
 
-        modules.forEach(item ->
-                item.runTest(device)
-        );
+       testModule.runTest(device);
     }
 
     @AfterTest
