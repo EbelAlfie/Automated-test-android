@@ -33,6 +33,7 @@ public class AndroidTest extends ConfigConsumer implements BaseTestModule {
 
         options.setCapability("platformName", "Android");
         options.setCapability("appium:udid", device.udid);
+        options.setCapability("appium:systemPort", device.adbPort);
         options.setCapability("appPackage", config.appPackageId);
         options.setCapability("appActivity", config.appActivity);
 
