@@ -2,8 +2,14 @@ package models;
 
 public class Device {
     public boolean userBlocked;
+
+    //Port for iOS
+    public int wdaLocalPort;
+    public int mjpegServerPort;
+    //Port for Android
     public int adbPort;
     public int systemPort;
+
     public boolean offline;
     public boolean realDevice;
     public String udid;
@@ -13,8 +19,12 @@ public class Device {
 
     public Device() {
         this.userBlocked = false;
+
+        this.wdaLocalPort = 0;
+        this.mjpegServerPort = 0;
         this.adbPort = 0;
         this.systemPort = 0;
+
         this.offline = false;
         this.realDevice = false;
         this.udid = "";
@@ -25,6 +35,8 @@ public class Device {
 
     public Device(
             boolean userBlocked,
+            int wdaLocalPort,
+            int mjpegServerPort,
             int adbPort,
             int systemPort,
             boolean offline,
@@ -35,8 +47,12 @@ public class Device {
             boolean liveStreaming
     ) {
         this.userBlocked = userBlocked;
+
+        this.wdaLocalPort = wdaLocalPort;
+        this.mjpegServerPort = mjpegServerPort;
         this.adbPort = adbPort;
         this.systemPort = systemPort;
+
         this.offline = offline;
         this.realDevice = realDevice;
         this.udid = udid;

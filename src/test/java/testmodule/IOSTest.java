@@ -32,6 +32,7 @@ public class IOSTest extends ConfigConsumer implements BaseTestModule {
 
         caps.setCapability("appium:bundleId", config.appPackageId);
         caps.setCapability("appium:udid", device.udid);
+        caps.setCapability("appium:systemPort", device.wdaLocalPort);
 
         try {
             driver = new IOSDriver(
