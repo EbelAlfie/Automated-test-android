@@ -27,7 +27,7 @@ public class IOSTest extends ConfigConsumer implements BaseTestModule {
     }
 
     @Override
-    public boolean runTest() {
+    public boolean runTest(Device device) {
         boolean testStatus = false;
 
         DesiredCapabilities caps = new DesiredCapabilities();
@@ -35,11 +35,12 @@ public class IOSTest extends ConfigConsumer implements BaseTestModule {
         caps.setCapability("appium:automationName", "XCUITest");
 
         caps.setCapability("appium:bundleId", config.appPackageId);
-        caps.setCapability("appium:udid", "00008120-001139021139A01E");
+        caps.setCapability("appium:udid", device.udid);
+        caps.setCapability("appium:systemPort", device.wdaLocalPort);
 
         try {
             driver = new IOSDriver(
-                    URI.create(this.config.baseUrl).toURL(),
+                    URI.create(this.config.baseUrl + "wd/hub").toURL(),
                     caps
             );
 

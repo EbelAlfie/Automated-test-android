@@ -8,33 +8,40 @@ import service.DeviceFarmService;
 import testmodule.AndroidTest;
 import testmodule.IOSTest;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 public class TestEntryPoint {
 
     private final Config config = new Config();
-    private final List<BaseTestModule> modules = new ArrayList<>();
+//    private final List<BaseTestModule> modules = new ArrayList<>();
 
-//    @DataProvider(name = "device-provider", parallel = true)
-//    public Object[] devicesProvider() {
-//        DeviceFarmService deviceService = new DeviceFarmService(config);
-//        Device[] devices = deviceService.getAvailableDevices();
-//        return devices;
-//    }
+    @DataProvider(name = "device-provider", parallel = true)
+    public Object[] devicesProvider() {
+        DeviceFarmService deviceService = new DeviceFarmService(config);
+        Device[] devices = deviceService.getAvailableDevices();
+        System.out.println(">>> Available Devices");
+        Arrays.stream(devices).forEach(item -> System.out.println(item.udid));
+        return devices;
+    }
 
-    @Test
-    public void testMethod() {
-        modules.add(new IOSTest(config));
-//        modules.add(new AndroidTest(config));
+    @Test(
+            dataProvider = "device-provider",
+            threadPoolSize = 4
+    )
+    public void testMethod(Device device) {
+        BaseTestModule testModule;
+        if(device.platform.equals("ios")) {
+            testModule = new IOSTest(config);
+        } else {
+           testModule = new AndroidTest(config);
+        }
 
-        modules.forEach(item ->
-                item.runTest()
-        );
+       testModule.runTest(device);
     }
 
     @AfterTest
     void tearDown() {
-        modules.forEach(BaseTestModule::afterTest);
+//        modules.forEach(BaseTestModule::afterTest);
     }
 }

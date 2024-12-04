@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import javax.naming.MalformedLinkException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.time.Duration;
@@ -27,7 +28,7 @@ public class AndroidTest extends ConfigConsumer implements BaseTestModule {
     }
 
     @Override
-    public boolean runTest() {
+    public boolean runTest(Device device) {
         boolean testStatus = false;
 
         UiAutomator2Options options = new UiAutomator2Options()
@@ -35,11 +36,11 @@ public class AndroidTest extends ConfigConsumer implements BaseTestModule {
 
         options.setCapability("platformName", "Android");
         options.setCapability("appium:automationName","UiAutomator2");
-        options.setCapability("deviceName", "jackpotltexx");
-        options.setCapability("udid", "5200802feeb735cf");
-        options.setCapability("appPackage", "com.alfamart.alfagift.debug");
-        options.setCapability("appActivity", "com.alfamart.alfagift.screen.splash.SplashActivity");
-
+        options.setCapability("appium:udid", device.udid);
+        options.setCapability("appium:systemPort", device.systemPort);
+        options.setCapability("appium:adbPort", device.adbPort);
+        options.setCapability("appPackage", config.appPackageId);
+        options.setCapability("appActivity", config.appActivity);
 
         try {
             driver = new AndroidDriver(
@@ -52,11 +53,12 @@ public class AndroidTest extends ConfigConsumer implements BaseTestModule {
 
             //Test Case 2: Add to Cart
             addToCart(driver);
-            
+
 
             testStatus = true ;
         } catch (MalformedURLException e1) {
             System.out.println("Yahh " + e1);
+            System.out.println("Yahh " + e1.getMessage());
         }
 
         return testStatus;
