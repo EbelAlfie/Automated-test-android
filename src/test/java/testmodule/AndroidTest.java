@@ -7,10 +7,13 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import models.Device;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.TestStatus;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.time.Duration;
 import java.util.Map;
 
 public class AndroidTest extends ConfigConsumer implements BaseTestModule {
@@ -44,7 +47,10 @@ public class AndroidTest extends ConfigConsumer implements BaseTestModule {
                     URI.create(this.config.baseUrl + "wd/hub").toURL(),
                     options
             );
-            driver.findElement(new AppiumBy.ByAccessibilityId("btn_chat")).click();
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("btn_login")));
+            driver.findElement(AppiumBy.id("btn_login")).click();
+
             testStatus = true;
         } catch (MalformedURLException e1) {
             System.out.println("Yahh " + e1);

@@ -7,8 +7,8 @@ public enum TestStatus {
     public final String value;
     TestStatus(String value) {this.value = value;}
 
-    public static TestStatus getTestStatus(boolean status) {
-        if (status) return PASSED;
-        else return FAILED;
+    public static String getTestStatus(boolean status) {
+        if (status) return PASSED.value;
+        else return FAILED.value;
     }
 }
