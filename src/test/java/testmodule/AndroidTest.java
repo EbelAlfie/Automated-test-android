@@ -50,13 +50,8 @@ public class AndroidTest extends ConfigConsumer implements BaseTestModule {
             //Test Case 1: Login
             login(driver);
 
-//            //Test Case 2: Add to Cart
+            //Test Case 2: Add to Cart
             addToCart(driver);
-
-//            //Test Case 3: Check Out
-//            login(driver);
-//            addToCart(driver);
-//            checkout(driver);
             
 
             testStatus = true ;
@@ -65,10 +60,6 @@ public class AndroidTest extends ConfigConsumer implements BaseTestModule {
         }
 
         return testStatus;
-    }
-
-    private void checkout(AndroidDriver driver) {
-        driver.findElement(AppiumBy.id("iv_basket")).click();
     }
 
     private void addToCart(AndroidDriver driver) {

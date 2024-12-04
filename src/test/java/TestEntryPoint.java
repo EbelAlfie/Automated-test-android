@@ -6,6 +6,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import service.DeviceFarmService;
 import testmodule.AndroidTest;
+import testmodule.IOSTest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +25,8 @@ public class TestEntryPoint {
 
     @Test
     public void testMethod() {
-//        modules.add(new IOSTest(config));
-        modules.add(new AndroidTest(config));
+        modules.add(new IOSTest(config));
+//        modules.add(new AndroidTest(config));
 
         modules.forEach(item ->
                 item.runTest()
