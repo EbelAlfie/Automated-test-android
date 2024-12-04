@@ -9,7 +9,7 @@ public interface BaseTestModule {
      *
      * @return true if test is run and false if it fails to run
      */
-    public boolean runTest();
+    public boolean runTest(Device device);
 
     public void afterTest() ;
 }
