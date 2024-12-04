@@ -6,18 +6,19 @@ import base.ConfigConsumer;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
-import io.appium.java_client.ios.IOSDriver;
 import models.Device;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import utils.TestStatus;
 
-import javax.naming.MalformedLinkException;
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.util.Map;
 
 public class AndroidTest extends ConfigConsumer implements BaseTestModule {
     AndroidDriver driver = null;
 
-    public AndroidTest(Config config) {super(config);}
+    public AndroidTest(Config config) {
+        super(config);
+    }
 
     @Override
     public void beforeTest() {
@@ -44,10 +45,15 @@ public class AndroidTest extends ConfigConsumer implements BaseTestModule {
                     options
             );
             driver.findElement(new AppiumBy.ByAccessibilityId("btn_chat")).click();
-            testStatus = true ;
+            testStatus = true;
         } catch (MalformedURLException e1) {
             System.out.println("Yahh " + e1);
             System.out.println("Yahh " + e1.getMessage());
+        } finally {
+            driver.executeScript(
+                    "devicefarm: setSessionStatus",
+                    Map.of("status", TestStatus.getTestStatus(testStatus))
+            ) ;
         }
 
         return testStatus;

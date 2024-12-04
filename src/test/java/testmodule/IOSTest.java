@@ -7,10 +7,12 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.ios.IOSDriver;
 import models.Device;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import utils.TestStatus;
 
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
+import java.util.Map;
 
 public class IOSTest extends ConfigConsumer implements BaseTestModule {
     IOSDriver driver = null;
@@ -43,6 +45,11 @@ public class IOSTest extends ConfigConsumer implements BaseTestModule {
             testStatus = true ;
         } catch (MalformedURLException e1) {
             System.out.println("Yahh " + e1);
+        } finally {
+            driver.executeScript(
+                    "devicefarm: setSessionStatus",
+                    Map.of("status", TestStatus.getTestStatus(testStatus))
+            ) ;
         }
 
         return testStatus;
