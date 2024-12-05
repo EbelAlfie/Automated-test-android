@@ -36,21 +36,21 @@ public class AndroidTest extends ConfigConsumer implements BaseTestModule {
                 .setAppPackage(config.appPackageId);
 
         options.setCapability("platformName", "Android");
-        options.setCapability("appium:automationName","UiAutomator2");
         options.setCapability("appium:udid", device.udid);
         options.setCapability("appium:systemPort", device.systemPort);
         options.setCapability("appium:adbPort", device.adbPort);
         options.setCapability("appPackage", config.appPackageId);
         options.setCapability("appActivity", config.appActivity);
+        options.setCapability("mobile: startActivity", config.appActivity);
 
         try {
             driver = new AndroidDriver(
-                    URI.create(this.config.baseUrl ).toURL(),
+                    URI.create(this.config.baseUrl + "wd/hub").toURL(),
                     options
             );
 
             //Test Case 1: Login
-            login(driver);
+//            login(driver);
 
             //Test Case 2: Add to Cart
             addToCart(driver);

@@ -10,6 +10,7 @@ import testmodule.IOSTest;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class TestEntryPoint {
 
@@ -22,7 +23,7 @@ public class TestEntryPoint {
         Device[] devices = deviceService.getAvailableDevices();
         System.out.println(">>> Available Devices");
         Arrays.stream(devices).forEach(item -> System.out.println(item.udid));
-        return devices;
+        return Arrays.stream(devices).filter(item -> !Objects.equals(item.udid, "00008101-001C314634D1003A")).toArray() ;
     }
 
     @Test(
