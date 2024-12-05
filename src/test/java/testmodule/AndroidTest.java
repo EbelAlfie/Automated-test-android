@@ -47,9 +47,11 @@ public class AndroidTest extends ConfigConsumer implements BaseTestModule {
                     URI.create(this.config.baseUrl + "wd/hub").toURL(),
                     options
             );
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("btn_login")));
-            driver.findElement(AppiumBy.id("btn_login")).click();
+            //Test Case 1: Login
+            login(driver);
+
+            //Test Case 2: Add to Cart
+            addToCart(driver);
 
             testStatus = true;
         } catch (MalformedURLException e1) {
@@ -63,6 +65,31 @@ public class AndroidTest extends ConfigConsumer implements BaseTestModule {
         }
 
         return testStatus;
+    }
+
+    private void addToCart(AndroidDriver driver) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("clickable_promo")));
+        driver.findElement(AppiumBy.id("clickable_promo")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("buttonCancel")));
+        driver.findElement(AppiumBy.id("buttonCancel")).click();
+        driver.findElement(AppiumBy.id("btn_add_to_cart")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("btn_add_to_cart")));
+        driver.findElement(AppiumBy.id("btn_increase_qty")).click();
+    }
+
+    private void login(AndroidDriver driver) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("btn_login")));
+        driver.findElement(AppiumBy.id("btn_login")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.android.packageinstaller:id/permission_allow_button")));
+        driver.findElement(AppiumBy.id("com.android.packageinstaller:id/permission_allow_button")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("et_phone")));
+        driver.findElement(AppiumBy.id("et_phone")).sendKeys("081586196863");
+        driver.findElement(AppiumBy.id("et_password")).sendKeys("Kelsha123!");
+        driver.findElement(AppiumBy.id("btn_next")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("btn_later")));
+        driver.findElement(AppiumBy.id("btn_later")).click();
     }
 
     @Override
