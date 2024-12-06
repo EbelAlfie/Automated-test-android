@@ -11,10 +11,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.TestStatus;
 
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.time.Duration;
+import java.net.URL;
+import java.util.Map;
 
 public class IOSTest extends ConfigConsumer implements BaseTestModule {
     IOSDriver driver = null;
@@ -52,6 +55,11 @@ public class IOSTest extends ConfigConsumer implements BaseTestModule {
             testStatus = true ;
         } catch (MalformedURLException e1) {
             System.out.println("Yahh " + e1);
+        } finally {
+            driver.executeScript(
+                    "devicefarm: setSessionStatus",
+                    Map.of("status", TestStatus.getTestStatus(testStatus))
+            ) ;
         }
 
         return testStatus;

@@ -9,15 +9,19 @@ import io.appium.java_client.android.options.UiAutomator2Options;
 import models.Device;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.TestStatus;
 
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.time.Duration;
+import java.util.Map;
 
 public class AndroidTest extends ConfigConsumer implements BaseTestModule {
     AndroidDriver driver = null;
 
-    public AndroidTest(Config config) {super(config);}
+    public AndroidTest(Config config) {
+        super(config);
+    }
 
     @Override
     public void beforeTest() {
@@ -56,6 +60,11 @@ public class AndroidTest extends ConfigConsumer implements BaseTestModule {
         } catch (MalformedURLException e1) {
             System.out.println("Yahh " + e1);
             System.out.println("Yahh " + e1.getMessage());
+        } finally {
+            driver.executeScript(
+                    "devicefarm: setSessionStatus",
+                    Map.of("status", TestStatus.getTestStatus(testStatus))
+            ) ;
         }
 
         return testStatus;
