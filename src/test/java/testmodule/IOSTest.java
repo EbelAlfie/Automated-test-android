@@ -7,6 +7,7 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.ios.IOSDriver;
 import models.Device;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -14,8 +15,8 @@ import utils.TestStatus;
 
 import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URL;
 import java.time.Duration;
+import java.net.URL;
 import java.util.Map;
 
 public class IOSTest extends ConfigConsumer implements BaseTestModule {
@@ -35,10 +36,9 @@ public class IOSTest extends ConfigConsumer implements BaseTestModule {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("platformName", "iOS");
         caps.setCapability("appium:automationName", "XCUITest");
-
         caps.setCapability("appium:bundleId", config.appPackageId);
         caps.setCapability("appium:udid", device.udid);
-        caps.setCapability("appium:systemPort", device.wdaLocalPort);
+        caps.setCapability("appium:wdaLocalPort", device.wdaLocalPort);
 
         try {
             driver = new IOSDriver(
@@ -46,8 +46,11 @@ public class IOSTest extends ConfigConsumer implements BaseTestModule {
                     caps
             );
 
+            //Test Case 1: Login
             login(driver);
-//            addToCart(driver);
+
+            //Test Case: Add to Cart
+            addToCart(driver);
 
             testStatus = true ;
         } catch (MalformedURLException e1) {
@@ -63,29 +66,38 @@ public class IOSTest extends ConfigConsumer implements BaseTestModule {
     }
 
     private void login(IOSDriver driver) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("LOGIN")));
-        driver.findElement(By.id("LOGIN"));
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.android.packageinstaller:id/permission_allow_button")));
-//        driver.findElement(AppiumBy.id("com.android.packageinstaller:id/permission_allow_button")).click();
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("et_phone")));
-//        driver.findElement(AppiumBy.id("et_phone")).sendKeys("087889940451");
-//        driver.findElement(AppiumBy.id("et_password")).sendKeys("Fachreza31");
-//        driver.findElement(AppiumBy.id("btn_next")).click();
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("btn_later")));
-//        driver.findElement(AppiumBy.id("btn_later")).click();
+        driver.findElement(By.id("LOGIN")).click();
+        String phoneNumber = "type == 'XCUIElementTypeTextField' AND value BEGINSWITH[c] 'Phone/Membership card number' AND visible == 1";
+        driver.findElement(AppiumBy.iOSNsPredicateString(phoneNumber)).click();
+        driver.findElement(AppiumBy.iOSNsPredicateString(phoneNumber)).sendKeys("082138894119");
+
+        String password = "type == 'XCUIElementTypeSecureTextField' AND value BEGINSWITH[c] 'Password' AND visible == 1";
+        driver.findElement(AppiumBy.iOSNsPredicateString(password)).click();
+        driver.findElement(AppiumBy.iOSNsPredicateString(password)).sendKeys("Axel123456789");
+
+        driver.findElement(By.id("Done")).click();
+
+        String btnNext = "type == 'XCUIElementTypeStaticText' AND value BEGINSWITH[c] 'Next' AND visible == 1";
+        driver.findElement(AppiumBy.iOSNsPredicateString(btnNext)).click();
     }
 
-//    private void addToCart(IOSDriver driver) {
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("clickable_promo")));
-//        driver.findElement(AppiumBy.id("clickable_promo")).click();
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("buttonCancel")));
-//        driver.findElement(AppiumBy.id("buttonCancel")).click();
-//        driver.findElement(AppiumBy.id("btn_add_to_cart")).click();
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("btn_add_to_cart")));
-//        driver.findElement(AppiumBy.id("btn_increase_qty")).click();
-//    }
+    private void addToCart(IOSDriver driver) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement promoButton = wait.until(ExpectedConditions.presenceOfElementLocated(
+                AppiumBy.iOSNsPredicateString("name == 'Promo' AND label == 'Promo' AND type == 'XCUIElementTypeButton'")
+        ));
+        promoButton.click();
+
+        WebElement addToCart = wait.until(ExpectedConditions.presenceOfElementLocated(
+                AppiumBy.iOSNsPredicateString("name == '+ Basket' AND label == '+ Basket' AND type == 'XCUIElementTypeButton'")
+        ));
+        addToCart.click();
+
+        WebElement addItem = wait.until(ExpectedConditions.presenceOfElementLocated(
+                AppiumBy.iOSNsPredicateString("name == 'ic plus new' AND label == 'ic plus new' AND type == 'XCUIElementTypeButton'")
+        ));
+        addItem.click();
+    }
 
     @Override
     public void afterTest() {
