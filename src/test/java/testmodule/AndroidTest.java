@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.TestStatus;
 
+import javax.naming.MalformedLinkException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.time.Duration;
