@@ -12,10 +12,11 @@ public class Config {
     public String appActivity;
     public String platform;
 
+    //TODO: change baseUrl if not using docker
     public Config() {
         this.baseUrl = "http://localhost:4723/";
         this.appPackageId = "com.alfamart.alfagift.debug";
-        this.appActivity = "";
+        this.appActivity = "com.alfamart.alfagift.screen.splash.SplashActivity";
         this.platform = "android";
     }
 
