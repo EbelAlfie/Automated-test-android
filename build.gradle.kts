@@ -18,7 +18,7 @@ dependencies {
     compileOnly("org.projectlombok:lombok:1.18.36")
     annotationProcessor("org.projectlombok:lombok:1.18.36'")
 
-    testImplementation("io.appium:java-client:9.3.0")
+    implementation("io.appium:java-client:9.3.0")
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.testng:testng:7.9.0")

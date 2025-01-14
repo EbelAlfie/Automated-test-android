@@ -23,7 +23,7 @@ public class TestEntryPoint {
         Device[] devices = deviceService.getAvailableDevices();
         System.out.println(">>> Available Devices");
         Arrays.stream(devices).forEach(item -> System.out.println(item.udid));
-        return Arrays.stream(devices).filter(item -> !Objects.equals(item.udid, "00008101-001C314634D1003A")).toArray() ;
+        return Arrays.stream(devices).toArray() ;
     }
 
     @Test(

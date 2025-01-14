@@ -1,6 +1,12 @@
 package org.example.test.base;
 
-public interface BaseTestPage {
+import io.appium.java_client.AppiumDriver;
 
-    public void setupTestScenario() ;
+public abstract class BaseTestPage {
+
+    AppiumDriver driver ;
+
+    protected BaseTestPage(AppiumDriver driver) {
+        this.driver = driver;
+    }
 }

@@ -84,16 +84,16 @@ public class AndroidTest extends ConfigConsumer implements BaseTestModule {
 
     private void login(AndroidDriver driver) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.android.permissioncontroller:id/permission_allow_button")));
-        driver.findElement(AppiumBy.id("com.android.permissioncontroller:id/permission_allow_button")).click();
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.android.permissioncontroller:id/permission_allow_button")));
+//        driver.findElement(AppiumBy.id("com.android.permissioncontroller:id/permission_allow_button")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("btn_login")));
         driver.findElement(AppiumBy.id("btn_login")).click();
 //        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.android.packageinstaller:id/permission_allow_button")));
 //        driver.findElement(AppiumBy.id("com.android.packageinstaller:id/permission_allow_button")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("et_phone")));
-        driver.findElement(AppiumBy.id("et_phone")).sendKeys("081586196863");
+        driver.findElement(AppiumBy.id("et_phone")).sendKeys("08978579751");
         wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("et_password")));
-        driver.findElement(AppiumBy.id("et_password")).sendKeys("Kelsha123!");
+        driver.findElement(AppiumBy.id("et_password")).sendKeys("Cacing007");
         wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("btn_next")));
         driver.findElement(AppiumBy.id("btn_next")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("btn_later")));
