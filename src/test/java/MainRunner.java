@@ -1,12 +1,12 @@
-import cucumber.api.CucumberOptions;
-import cucumber.api.testng.AbstractTestNGCucumberTests;
+import io.cucumber.testng.AbstractTestNGCucumberTests;
+import io.cucumber.testng.CucumberOptions;
 import org.example.test.models.Device;
 import org.example.test.testdriver.AndroidTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 
 @CucumberOptions(
-        glue = { "hooks/" },
+        glue = { "/" },
         features = { "src/test/resources/features" },
         tags = "@login"
 )

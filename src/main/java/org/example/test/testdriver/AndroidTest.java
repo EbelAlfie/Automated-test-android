@@ -2,28 +2,22 @@ package org.example.test.testdriver;
 
 import org.example.test.base.Config;
 import org.example.test.base.ConfigConsumer;
-import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import org.example.test.models.Device;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.context.annotation.Configuration;
+
 import java.net.MalformedURLException;
 import java.net.URI;
-import java.time.Duration;
-import java.util.Map;
 
+@Configuration
 public class AndroidTest extends ConfigConsumer {
     public static Device device;
 
     public static AndroidDriver driver = null;
 
-    public AndroidTest(Config config) {
-        super(config);
-    }
-
-    public void beforeTest() {
-
+    public AndroidTest() {
+        super(new Config());
     }
 
     public void runTest(Device device) {
