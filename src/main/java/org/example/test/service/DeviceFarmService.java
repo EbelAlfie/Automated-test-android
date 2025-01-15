@@ -1,10 +1,10 @@
-package service;
+package org.example.test.service;
 
-import base.Config;
-import base.ConfigConsumer;
+import org.example.test.base.Config;
+import org.example.test.base.ConfigConsumer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import models.Device;
+import org.example.test.models.Device;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;

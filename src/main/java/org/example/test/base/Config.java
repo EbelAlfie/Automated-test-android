@@ -1,4 +1,4 @@
-package base;
+package org.example.test.base;
 
 /**
  * @field baseUrl This is the base url for appium server

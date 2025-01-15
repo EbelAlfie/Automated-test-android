@@ -1,4 +1,4 @@
-package utils;
+package org.example.test.utils;
 
 public enum TestStatus {
     FAILED("failed"),

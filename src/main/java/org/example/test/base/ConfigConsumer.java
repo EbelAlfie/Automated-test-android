@@ -1,4 +1,4 @@
-package base;
+package org.example.test.base;
 
 /**
  * Implement this if you need config

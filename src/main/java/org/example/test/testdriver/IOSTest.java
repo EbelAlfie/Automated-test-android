@@ -1,35 +1,27 @@
-package testmodule;
+package org.example.test.testdriver;
 
-import base.BaseTestModule;
-import base.Config;
-import base.ConfigConsumer;
+import org.example.test.base.Config;
+import org.example.test.base.ConfigConsumer;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.ios.IOSDriver;
-import models.Device;
+import org.example.test.models.Device;
+import org.example.test.utils.TestStatus;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import utils.TestStatus;
 
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.time.Duration;
-import java.net.URL;
 import java.util.Map;
 
-public class IOSTest extends ConfigConsumer implements BaseTestModule {
+public class IOSTest extends ConfigConsumer {
     IOSDriver driver = null;
 
     public IOSTest(Config config) {super(config);}
 
-    @Override
-    public void beforeTest() {
-
-    }
-
-    @Override
     public boolean runTest(Device device) {
         boolean testStatus = false;
 
@@ -97,10 +89,5 @@ public class IOSTest extends ConfigConsumer implements BaseTestModule {
                 AppiumBy.iOSNsPredicateString("name == 'ic plus new' AND label == 'ic plus new' AND type == 'XCUIElementTypeButton'")
         ));
         addItem.click();
-    }
-
-    @Override
-    public void afterTest() {
-        driver.quit();
     }
 }
