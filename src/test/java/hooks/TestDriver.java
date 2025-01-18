@@ -5,6 +5,9 @@ import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import org.example.test.testdriver.AndroidTest;
 import org.example.test.utils.TestStatus;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
 import java.util.Map;
 
 public class TestDriver {
@@ -20,5 +23,12 @@ public class TestDriver {
             "devicefarm: setSessionStatus",
             Map.of("status", TestStatus.getTestStatus(!scenario.isFailed()))
     ) ;
+  }
+
+  @SpringBootTest
+  public static class TestApplication {
+    @Test
+    void contextLoads() {
+    }
   }
 }

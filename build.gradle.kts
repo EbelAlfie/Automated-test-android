@@ -28,9 +28,16 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
-tasks.test {
-    useTestNG()
-    testLogging {
-        showStandardStreams = true // Enables System.out and System.err logs
+tasks.register( name ="runDeviceFarm", type = Test::class) {
+    useTestNG {
+        suites("src/test/resources/device_farm/deviceFarm.xml")
     }
+}
+
+tasks.test {
+    dependsOn(tasks.getByName("runDeviceFarm"))
+    useTestNG {
+        suites("src/test/resources/parallel_testing.xml")
+    }
+    mustRunAfter(tasks.getByName("runDeviceFarm"))
 }
