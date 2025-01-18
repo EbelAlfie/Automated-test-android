@@ -35,6 +35,7 @@ tasks.register( name ="runDeviceFarm", type = Test::class) {
 }
 
 tasks.test {
+    systemProperty("cucumber.filter.tags", "cucumber.filter.tags")
     dependsOn(tasks.getByName("runDeviceFarm"))
     useTestNG {
         suites("src/test/resources/parallel_testing.xml")

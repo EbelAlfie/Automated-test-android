@@ -15,8 +15,8 @@ public class Config {
     //TODO: change baseUrl if not using docker
     public Config() {
         this.baseUrl = "http://localhost:4723/";
-        this.appPackageId = "com.alfamart.alfagift.debug";
-        this.appActivity = "com.alfamart.alfagift.screen.splash.SplashActivity";
+        this.appPackageId = "";
+        this.appActivity = "";
         this.platform = "android";
     }
 

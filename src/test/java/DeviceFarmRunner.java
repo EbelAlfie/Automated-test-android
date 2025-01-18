@@ -32,7 +32,8 @@ public class DeviceFarmRunner extends AbstractTestNGSpringContextTests {
 
   @BeforeClass
   @Parameters({ "cucumber.filter.tags" })
-  public void getConnectedDevice(@Optional(value = "cucumber.filter.tags") String tag) {
+  public void getConnectedDevice(@Optional(value = "cucumber.filter.tags") String parameterizeTag) {
+    String tag = getScenario(parameterizeTag) ;
     scenarioTags = tag.split("\\.");
     Arrays.stream(scenarioTags).forEach(System.out::println);
     availableDevices = service.getAvailableDevices();
@@ -45,21 +46,19 @@ public class DeviceFarmRunner extends AbstractTestNGSpringContextTests {
 
   private void generateXml(String[] tags) {
     int totalDevice = availableDevices.length;
+    int totalTest = tags.length;
 
-//        if (totalDevice == 0) throw new Exception("No device found");
-//        if (tags.length == 0) throw new Exception("No test tag specified");
+    int totalThread = totalTest ; //Or device
 
     XmlSuite xmlSuite = factory.createXmlSuite(totalDevice);
-    for (int i = 0; i < totalDevice; i++) {
+    for (int i = 0; i < totalThread; i++) {
+      String tag = tags[i];
 
-      String tag ;
-      try {
-        tag = tags[i];
-      } catch (IndexOutOfBoundsException e) {
-        tag = tags[tags.length - 1] ;
-      }
+      if (i >= totalDevice) break;
 
-      XmlTest test = factory.createXmlTest(tag, xmlSuite, availableDevices, i);
+      Device assignedDevice = availableDevices[i] ;
+
+      XmlTest test = factory.createXmlTest(tag, xmlSuite, assignedDevice);
 
       XmlClass xmlClass = new XmlClass();
       xmlClass.setName("MainRunner");
@@ -67,5 +66,9 @@ public class DeviceFarmRunner extends AbstractTestNGSpringContextTests {
       test.setXmlClasses(List.of(xmlClass));
     }
     factory.saveXml(xmlSuite, filePath);
+  }
+
+  private String getScenario(String parameterizedTag) {
+    return parameterizedTag == null ? System.getProperty("cucumber.filter.tags") : parameterizedTag ;
   }
 }

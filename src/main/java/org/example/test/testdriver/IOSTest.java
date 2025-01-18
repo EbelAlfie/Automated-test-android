@@ -38,12 +38,6 @@ public class IOSTest extends ConfigConsumer {
                     caps
             );
 
-            //Test Case 1: Login
-            login(driver);
-
-            //Test Case: Add to Cart
-            addToCart(driver);
-
             testStatus = true ;
         } catch (MalformedURLException e1) {
             System.out.println("Yahh " + e1);
@@ -55,39 +49,5 @@ public class IOSTest extends ConfigConsumer {
         }
 
         return testStatus;
-    }
-
-    private void login(IOSDriver driver) {
-        driver.findElement(By.id("LOGIN")).click();
-        String phoneNumber = "type == 'XCUIElementTypeTextField' AND value BEGINSWITH[c] 'Phone/Membership card number' AND visible == 1";
-        driver.findElement(AppiumBy.iOSNsPredicateString(phoneNumber)).click();
-        driver.findElement(AppiumBy.iOSNsPredicateString(phoneNumber)).sendKeys("082138894119");
-
-        String password = "type == 'XCUIElementTypeSecureTextField' AND value BEGINSWITH[c] 'Password' AND visible == 1";
-        driver.findElement(AppiumBy.iOSNsPredicateString(password)).click();
-        driver.findElement(AppiumBy.iOSNsPredicateString(password)).sendKeys("Axel123456789");
-
-        driver.findElement(By.id("Done")).click();
-
-        String btnNext = "type == 'XCUIElementTypeStaticText' AND value BEGINSWITH[c] 'Next' AND visible == 1";
-        driver.findElement(AppiumBy.iOSNsPredicateString(btnNext)).click();
-    }
-
-    private void addToCart(IOSDriver driver) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement promoButton = wait.until(ExpectedConditions.presenceOfElementLocated(
-                AppiumBy.iOSNsPredicateString("name == 'Promo' AND label == 'Promo' AND type == 'XCUIElementTypeButton'")
-        ));
-        promoButton.click();
-
-        WebElement addToCart = wait.until(ExpectedConditions.presenceOfElementLocated(
-                AppiumBy.iOSNsPredicateString("name == '+ Basket' AND label == '+ Basket' AND type == 'XCUIElementTypeButton'")
-        ));
-        addToCart.click();
-
-        WebElement addItem = wait.until(ExpectedConditions.presenceOfElementLocated(
-                AppiumBy.iOSNsPredicateString("name == 'ic plus new' AND label == 'ic plus new' AND type == 'XCUIElementTypeButton'")
-        ));
-        addItem.click();
     }
 }

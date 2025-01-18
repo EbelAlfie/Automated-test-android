@@ -31,18 +31,16 @@ public class XmlCreator {
     public XmlTest createXmlTest(
             String testTag,
             XmlSuite xmlSuite,
-            Device[] devices,
-            int index
+            Device device
     ) {
         XmlTest test = new XmlTest(xmlSuite);
-        Device device = devices[index];
 
-        test.setName("HEHE " + index);
+        test.setName("Test " + testTag + " on device " + device.udid);
 
-        /** Cucumber exclusives */
+        /* Cucumber exclusives */
         test.addParameter("cucumber.filter.tags", testTag);
 
-        /** Device farm exclusives */
+        /* Device farm exclusives */
         test.addParameter("deviceName", device.name);
         test.addParameter("hostName", device.host);
         test.addParameter("deviceUdid", device.udid);
