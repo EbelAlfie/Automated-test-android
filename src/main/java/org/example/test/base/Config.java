@@ -1,11 +1,14 @@
 package org.example.test.base;
 
+import org.springframework.stereotype.Component;
+
 /**
  * @field baseUrl This is the base url for appium server
  * @field appPackageId This is bundle id or app package name
  * @field appActivity Main activity to be launched in android
  * @field platform either android/ iOS to test each one
  * */
+@Component
 public class Config {
     public String baseUrl;
     public String appPackageId;

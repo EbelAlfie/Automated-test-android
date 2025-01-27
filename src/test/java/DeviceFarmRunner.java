@@ -1,3 +1,4 @@
+import org.example.test.MainApplication;
 import org.example.test.models.Device;
 import org.example.test.service.DeviceFarmService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import org.example.test.utils.XmlCreator;
 import java.util.Arrays;
 import java.util.List;
 
-@SpringBootTest
+@SpringBootTest(classes = { MainApplication.class })
 public class DeviceFarmRunner extends AbstractTestNGSpringContextTests {
   private Device[] availableDevices = new Device[0] ;
   private String[] scenarioTags = new String[0];
@@ -31,9 +32,9 @@ public class DeviceFarmRunner extends AbstractTestNGSpringContextTests {
   private String filePath ;
 
   @BeforeClass
-  @Parameters({ "cucumber.filter.tags" })
+  @Parameters({"cucumber.filter.tags"})
   public void getConnectedDevice(@Optional(value = "cucumber.filter.tags") String parameterizeTag) {
-    String tag = getScenario(parameterizeTag) ;
+    String tag = getScenario(parameterizeTag);
     scenarioTags = tag.split("\\.");
     Arrays.stream(scenarioTags).forEach(System.out::println);
     availableDevices = service.getAvailableDevices();
@@ -56,7 +57,7 @@ public class DeviceFarmRunner extends AbstractTestNGSpringContextTests {
 
       if (i >= totalDevice) break;
 
-      Device assignedDevice = availableDevices[i] ;
+      Device assignedDevice = availableDevices[i];
 
       XmlTest test = factory.createXmlTest(tag, xmlSuite, assignedDevice);
 

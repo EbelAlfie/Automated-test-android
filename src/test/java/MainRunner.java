@@ -11,23 +11,23 @@ import org.testng.annotations.Parameters;
         tags = "@login"
 )
 public class MainRunner extends AbstractTestNGCucumberTests {
-  @BeforeClass
-  @Parameters({ "deviceName", "hostName", "deviceUdid", "sdkVersion", "systemPort", "adbPort" })
-  public void setupDevice(
-          String deviceName,
-          String hostName,
-          String deviceUdid,
-          String sdkVersion,
-          String systemPort,
-          String adbPort
-  ) {
-    AndroidTest.device = new Device(
-            deviceName,
-            hostName,
-            deviceUdid,
-            sdkVersion,
-            Integer.parseInt(systemPort),
-            Integer.parseInt(adbPort)
-    );
-  }
+//  @BeforeClass
+//  @Parameters({ "deviceName", "hostName", "deviceUdid", "sdkVersion", "systemPort", "adbPort" })
+//  public void setupDevice(
+//          String deviceName,
+//          String hostName,
+//          String deviceUdid,
+//          String sdkVersion,
+//          String systemPort,
+//          String adbPort
+//  ) {
+//    AndroidTest.device = new Device(
+//            deviceName,
+//            hostName,
+//            deviceUdid,
+//            sdkVersion,
+//            Integer.parseInt(systemPort),
+//            Integer.parseInt(adbPort)
+//    );
+//  }
 }

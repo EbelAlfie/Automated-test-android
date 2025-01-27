@@ -14,6 +14,8 @@ repositories {
 dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("com.google.code.gson:gson:2.11.0")
+    testImplementation("io.cucumber:cucumber-java:7.20.1")
+    testImplementation("io.cucumber:cucumber-junit:7.20.1")
 
     implementation("io.cucumber:cucumber-java:7.1.0")
     implementation("io.cucumber:cucumber-testng:7.1.0")

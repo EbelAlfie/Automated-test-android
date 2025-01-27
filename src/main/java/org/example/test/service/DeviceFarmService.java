@@ -8,6 +8,8 @@ import org.example.test.models.Device;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.springframework.context.annotation.Configuration;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -17,6 +19,7 @@ import java.time.Duration;
 /**
  *
  * */
+@Configuration
 public class DeviceFarmService extends ConfigConsumer {
 
     public DeviceFarmService(Config config) {super(config);}
