@@ -1,4 +1,7 @@
-# Setup
+# Automated Paralel Device Farm
+<sub>~ Throughout iOS and Androids, I alone am tested</sub>
+
+This project goals is to create a program that is able to execute a test for an app accross multiple devices (Android or iOS) in parallel manners. The choosen device manager/ test server is appium.
 
 ## Prerequisite
 - Node Js
